@@ -13,4 +13,7 @@ def get(event, context):
 
     # create a response
     return {'statusCode': 200,
+            'headers': {
+                'Access-Control-Allow-Origin': "http://localhost:8080",
+            },
             'body': json.dumps(dict(found_todo))}

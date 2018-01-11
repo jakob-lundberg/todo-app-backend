@@ -9,4 +9,7 @@ def todo_list(event, context):
 
     # create a response
     return {'statusCode': 200,
+            'headers': {
+                'Access-Control-Allow-Origin': "*",
+            },
             'body': json.dumps({'items': [dict(result) for result in results]})}

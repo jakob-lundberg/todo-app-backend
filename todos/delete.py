@@ -17,4 +17,9 @@ def delete(event, context):
                 'body': json.dumps({'error_message': 'Unable to delete the TODO'})}
 
     # create a response
-    return {'statusCode': 204}
+    return {
+        'statusCode': 204,
+        'headers': {
+            'Access-Control-Allow-Origin': "*",
+        },
+    }
