@@ -3,6 +3,7 @@ import logging
 import uuid
 
 from todos.todo_model import TodoModel
+import todos.config
 
 
 def create(event, context):
@@ -33,7 +34,7 @@ def create(event, context):
     # create a response
     return {'statusCode': 201,
             'headers': {
-                'Access-Control-Allow-Origin': "*",
+                'Access-Control-Allow-Origin': todos.config.aws['allow-origin'],
             },
             'body': json.dumps(dict(a_todo))}
 

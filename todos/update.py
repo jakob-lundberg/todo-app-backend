@@ -3,6 +3,7 @@ import logging
 
 from pynamodb.exceptions import DoesNotExist
 from todos.todo_model import TodoModel
+import todos.config
 
 
 def update(event, context):
@@ -25,8 +26,8 @@ def update(event, context):
     if 'text' in data and data['text'] != found_todo.text:
         found_todo.text = data['text']
         todo_changed = True
-    if 'checked' in data and data['checked'] != found_todo.checked:
-        found_todo.checked = data['checked']
+    if 'completed' in data and data['completed'] != found_todo.completed:
+        found_todo.completed = data['completed']
         todo_changed = True
 
     if todo_changed:
@@ -36,5 +37,8 @@ def update(event, context):
 
     # create a response
     return {'statusCode': 200,
+            'headers': {
+                'Access-Control-Allow-Origin': todos.config.aws['allow-origin'],
+            },
             'body': json.dumps(dict(found_todo))}
 

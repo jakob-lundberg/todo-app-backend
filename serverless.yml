@@ -1,4 +1,4 @@
-service: aws-python-rest-api-with-pynamodb
+service: todo-app-with-pynamodb
 
 frameworkVersion: ">=1.1.0 <2.0.0"
 
@@ -20,11 +20,12 @@ provider:
   name: aws
   runtime: python3.6
   memorySize: 256
-  region: eu-central-1
+  region: eu-west-1
   stage: dev
   profile: default
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+    REGION: ${self:provider.region}
   iamRoleStatements:
     - Effect: Allow
       Action:

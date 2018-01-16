@@ -2,6 +2,7 @@ import json
 
 from pynamodb.exceptions import DoesNotExist, DeleteError
 from todos.todo_model import TodoModel
+import todos.config
 
 
 def delete(event, context):
@@ -20,6 +21,6 @@ def delete(event, context):
     return {
         'statusCode': 204,
         'headers': {
-            'Access-Control-Allow-Origin': "*",
+            'Access-Control-Allow-Origin': todos.config.aws['allow-origin'],
         },
     }

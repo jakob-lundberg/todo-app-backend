@@ -2,6 +2,7 @@ import json
 
 from pynamodb.exceptions import DoesNotExist
 from todos.todo_model import TodoModel
+import todos.config
 
 
 def get(event, context):
@@ -14,6 +15,6 @@ def get(event, context):
     # create a response
     return {'statusCode': 200,
             'headers': {
-                'Access-Control-Allow-Origin': "http://localhost:8080",
+                'Access-Control-Allow-Origin': todos.config.aws['allow-origin'],
             },
             'body': json.dumps(dict(found_todo))}

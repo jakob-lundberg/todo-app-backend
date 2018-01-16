@@ -4,6 +4,8 @@ from datetime import datetime
 from pynamodb.attributes import UnicodeAttribute, BooleanAttribute, UTCDateTimeAttribute
 from pynamodb.models import Model
 
+import todos.config
+
 
 class TodoModel(Model):
     class Meta:
@@ -11,8 +13,8 @@ class TodoModel(Model):
         if 'ENV' in os.environ:
             host = 'http://localhost:8000'
         else:
-            region = 'eu-central-1'
-            host = 'https://dynamodb.eu-central-1.amazonaws.com'
+            region = todos.config.aws['region']
+            host = todos.config.aws['dynamodb_host']
 
     todo_id = UnicodeAttribute(hash_key=True, null=False)
     text = UnicodeAttribute(null=False)

@@ -1,6 +1,7 @@
 import json
 
 from todos.todo_model import TodoModel
+import todos.config
 
 
 def todo_list(event, context):
@@ -10,6 +11,6 @@ def todo_list(event, context):
     # create a response
     return {'statusCode': 200,
             'headers': {
-                'Access-Control-Allow-Origin': "*",
+                'Access-Control-Allow-Origin': todos.config.aws['allow-origin'],
             },
             'body': json.dumps({'items': [dict(result) for result in results]})}
